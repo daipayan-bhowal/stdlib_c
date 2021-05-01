@@ -8,4 +8,7 @@ char *strcpy(char *sl, const char *s2);
 char *strdup(char *s);
 void *memcpy (register void *dst, register const void *src, size_t len);
 void *memset(register void *dst, register int val,size_t len);
+char* strncat(char* destination, const char* source, size_t num);
+char *strncpy(char *destination, const char *source, int num);
+char *strtok(char *source, char *delim);
 #endif
