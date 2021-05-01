@@ -28,6 +28,47 @@ char *strncpy(char *destination, const char *source, int num)
 char *strtok(char *source, char *delim)
 {
    static char *next;
+   int i = 0, j = 0, flag1 = 0, flag2 = 0;
+
+   if(source == NULL)
+   {
+     source = next;
+   }
+   if (source[i] == '\0')
+   {
+     return NULL;
+   }
+
+   for (i = 0; source[i] != '\0'; i++)
+   {
+      for (j = 0; delim[j] != '\0'; j++)
+      {
+         if (source[i] == delim[j])
+         {
+           source[i] = '\0';
+           i++;
+           j = -1;
+           flag1 = 1;
+         }
+         else
+         {
+           flag2 = 1;
+         }
+      }
+
+      if (flag1 && flag2)
+      {
+             next = source + i;
+         return source;
+      }
+    }
+ next = source + i;
+ return source;
+}
+
+char *strtok_d(char *source, char *delim)  /* returns duplicate string of strtok */
+{
+   static char *next;
    int i = 0,j = 0, flag1 = 0, flag2 = 0;
    char *dup;
    if(source == NULL)
@@ -46,7 +87,7 @@ char *strtok(char *source, char *delim)
          if (source[i] == delim[j])
          {
            dup =(char*) malloc(sizeof(char)*(i));
-           my_strncpy(dup,source,i);
+           strncpy(dup,source,i);
            dup[i] = '\0';
            i++;
            j = -1;
